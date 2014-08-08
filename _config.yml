@@ -1,8 +1,8 @@
 # Site settings
 title: Blindstore
 description: "Open source Private Information Retrieval datastore"
-baseurl: ""
-url: "blindstore.github.io"
+baseurl: "http://blindstore.github.io/blindstore-new-site"
+url: "http://blindstore.github.io/blindstore-new-site"
 github_username:  blindstore
 
 # Build settings
