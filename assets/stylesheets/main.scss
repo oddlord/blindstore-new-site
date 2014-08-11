@@ -60,6 +60,7 @@ html {
 }
 
 .section {
+  position: relative;
   min-height: 100%;
   padding: 1em;
   padding-top: 3em;
@@ -72,7 +73,7 @@ html {
 }
 
 .intro {
-  padding-top: 6em;
+  padding-top: 6.5em;
   text-align: left;
   background: $intro-background;
 
@@ -105,7 +106,8 @@ html {
   }
 
   .features {
-    margin-top: 5em;
+    position: relative;
+    margin-top: 3em;
     font-size: 80%;
 
     h2 {

@@ -14,29 +14,31 @@ layout: default
                     <p>{{ site.description }}. Provides an online lookup service which returns the correct answer without it ever knowing what the question was. Uses black magic.</p>
                 </div>
             </div>
-            <div class="row features">
-                <div class="col-lg-3">
-                    <h2>Single point of entry</h2>
-                    <p>Unlike Distributed Hash Table, not prone to Sybil attack, and the data is not inherently public, since server is free to restrict access with authentication and authorization</p>
-                </div>
-                <div class="col-lg-3 col-lg-offset-1">
-                    <h2>Privacy</h2>
-                    <p>Protocol guarantees that the server can't know what the client's query was, and that the client doesn't know anything except the record she inquired about.</p>
-                </div>
-                <div class="col-lg-3 col-lg-offset-1">
-                    <h2>Here be dragons</h2>
-                    <p>Blindstore is early work in progress and is made using experimental cryptographic software. It can be used for research purposes only.</p>
-                </div>
-            </div>
-            <div class="row calls">
-                <div class="col-lg-3 col-lg-offset-4">
-                    <div class="button">
-                        <a class="btn btn-default page-scroll" href="#details">See more details</a>
+            <div class="features">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h2>Single point of entry</h2>
+                        <p>Unlike Distributed Hash Table, not prone to Sybil attack, and the data is not inherently public, since server is free to restrict access with authentication and authorization</p>
+                    </div>
+                    <div class="col-lg-3 col-lg-offset-1">
+                        <h2>Privacy</h2>
+                        <p>Protocol guarantees that the server can't know what the client's query was, and that the client doesn't know anything except the record she inquired about.</p>
+                    </div>
+                    <div class="col-lg-3 col-lg-offset-1">
+                        <h2>Here be dragons</h2>
+                        <p>Blindstore is early work in progress and is made using experimental cryptographic software. It can be used for research purposes only.</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-lg-offset-1">
-                    <div class="button">
-                        <a class="btn btn-default page-scroll" href="#contribute">Contribute</a>
+                <div class="row calls">
+                    <div class="col-lg-3 col-lg-offset-4">
+                        <div class="button">
+                            <a class="btn btn-default page-scroll" href="#details">See more details</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-lg-offset-1">
+                        <div class="button">
+                            <a class="btn btn-default page-scroll" href="#contribute">Contribute</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,7 +50,12 @@ layout: default
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <h2>Implementation</h2>
+                    <h3>Protocol</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <h4>Implementation</h4>
                 </div>
             </div>
             <div class="row">
@@ -57,32 +64,34 @@ layout: default
                     <p>It uses <a href="https://hcrypt.com/">libscarab</a> for implementation of Smart-Vercauteren scheme Fully Homomorphic Encryption.</p>
                 </div>
                 <div class="col-lg-3 col-lg-offset-1 sidenotes visible-lg-block">
-                    <p>For PIR, there's a sender (server) who holds some bits of information, and receiver (client) who wants to retrieve some of the bits in such a way that sender won't know which bits exactly the receiver wanted to get.</p>
+                    <p>In the Private Information Retrieval protocol, there's a sender (server) who holds some bits of information, and receiver (client) who wants to retrieve some of the bits in such a way that sender won't know which bits exactly the receiver wanted to get.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <h4>Model</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <p>Using the Blindstore protocol, client can assume the server not to be trustworthy.</p>
+                    <p>The client locally encrypts the query using her Fully Homomorphic Encryption public key, and sends the encrypted query. The server evaluates certain homomorphic functions over the encrypted query and the data, and sends an encrypted response. Using her private key, client can decrypt it and obtain the plaintext response.</p>
+                    <p>Note that verification of authenticity of the plaintext response is out of scope of the Blindstore protocol.</p>
+                </div>
+                <div class="col-lg-3 col-lg-offset-1 sidenotes visible-lg-block">
                     <p>Homomorphism in this case is a property of asymmetric encryption which says there exist certain homomorphic functions \(f\) such that:
                     \[\text{DECRYPT}_{sk}(f\ (\text{ENCRYPT}_{pk}(\text{m}))) = f(\text{m})\]</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-8">
-                    <h2>Model</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8">
-                    <p>Using the protocol, client can assume the server not to be trustworthy.</p>
-                    <p>The client locally encrypts the query using her FHE public key, and sends the encrypted query. The server evaluates certain homomorphic functions involving the encrypted query and the data, and sends an encrypted response. Using her private key, client can decrypt it and obtain the plaintext response.</p>
-                    <p>Note that verification of authenticity of the plaintext response is out of scope of the Blindstore protocol.</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8">
-                    <h2>Feasibility</h2>
+                    <h3>Feasibility</h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-8">
                     <p>The total communication and computation cost per request are roughly logarithmic of the database size.</p>
-                    <p>Privacy comes at cost of these computation and communication overheads. With the current implementation it takes seconds to generate a response even for small datasets (hundreds of records). Good thing the response generation algorithm is highly parallelizable and we're working on its parallelization.</p>
+                    <p>Privacy comes at cost of this computation and communication overhead. With the current implementation it takes seconds to generate a response even for small datasets (hundreds of records). Good thing the response generation algorithm is highly parallelizable and we're working on making it significantly faster.</p>
                 </div>
                 <div class="col-lg-3 col-lg-offset-1 sidenotes visible-lg-block">
                     The communication cost per request is \(O(\gamma\log (m \cdot L))\), and computation cost per request is \(O(\gamma\log m + \gamma L)\), where \(m\) is a number of records in the database, \(L\) is a record size, and \(\gamma\) is the ciphertext size.
@@ -90,7 +99,7 @@ layout: default
             </div>
             <div class="row">
                 <div class="col-lg-8">
-                    <h2>Applications</h2>
+                    <h3>Applications</h3>
                     <p>Blindstore can be used as a building block for different privacy-sensitive applications where database server is considered not trustworthy, like:
                         <ul>
                             <li>Private domain name resolver</li>
