@@ -81,11 +81,11 @@ layout: default
             </div>
             <div class="row">
                 <div class="col-lg-8">
-                    <p>The total communication cost is logarithmic of database size. The computation cost for the server is polylogarithmic of database size and the encrypted index size.</p>
+                    <p>The total communication and computation cost per request are roughly logarithmic of the database size.</p>
                     <p>Privacy comes at cost of these computation and communication overheads. With the current implementation it takes seconds to generate a response even for small datasets (hundreds of records). Good thing the response generation algorithm is highly parallelizable and we're working on its parallelization.</p>
                 </div>
                 <div class="col-lg-3 col-lg-offset-1 sidenotes visible-lg-block">
-                    The communication cost per request is \(O(\gamma\log (m \cdot L))\), and computation cost per request is \(O(\gamma\log m + \gamma L)\), where \(m\) is a database size, \(L\) is a record size, and \(\gamma\) is the ciphertext size.
+                    The communication cost per request is \(O(\gamma\log (m \cdot L))\), and computation cost per request is \(O(\gamma\log m + \gamma L)\), where \(m\) is a number of records in the database, \(L\) is a record size, and \(\gamma\) is the ciphertext size.
                 </div>
             </div>
             <div class="row">
